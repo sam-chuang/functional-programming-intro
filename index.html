@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html width="100%" height="100%">
+  <head>
+    <meta charset="utf-8">
+    <title>Functional Programming Intro</title>
+    <link rel="stylesheet" href="impress-demo.css">
+    <link rel="stylesheet" href="prism-coy.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+  </head>
+  <body width="100%" height="100%">
+    <div id="impress">
+        <header class="step slide" data-x="-4000" data-y="-1500" style="display:flex; align-items:center;">
+            <div class="is-size-1 has-text-dark" style="text-align:center; width:100%;">Functional Programming Intro</div>
+        </header>
+        
+        <section class="step slide" data-x="-3000" data-y="-1500">
+            <h1 class="is-size-1 has-text-dark">What do Programmers want?</h1>
+            <br>
+            <ul>
+                <li><strong>Readable</strong></li>
+                <li><strong>Maintainable</strong> → Refactor/Change with confidence</li>
+                <li><strong>Reliable</strong> → No surprises, runtime errors etc...</li>
+            </ul>
+            <br>
+            <p>
+                Task: sum total numbers
+            </p>
+            <pre>
+                <code class="language-javascript">
+                    var numbers = [1,2,3];//input data
+
+                    var sum = 0;
+                    for (var i = 0; i < numbers.length; i++) {
+                        sum += numbers[i];
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="step slide" data-x="-2000" data-y="-1500">
+            <h1 class="is-size-1 has-text-dark">Array.prototype.forEach()</h1>
+            <br>
+            <p>
+                The <strong>forEach()</strong> method executes a provided function once for each array element.
+            </p>
+            <br>
+            <pre>
+                <code class="language-javascript">
+                    var numbers = [1,2,3];//input data
+
+                    var sum = 0;
+                    numbers.forEach(function (val) {
+                        sum += val;
+                    });
+                </code>
+            </pre>
+            <p>
+                Any side effects? 
+            </p>
+            <p>
+                Does it interact with external mutable state?
+            </p>
+        </section>
+
+        <section class="step slide" data-x="-1000" data-y="-1500">
+            <h1 class="is-size-1 has-text-dark">Array.prototype.reduce()</h1>
+            <br>
+            <p>
+                The <strong>reduce()</strong> method applies a function against an accumulator and each element in the array (from left to right) to reduce it to a value.
+            </p>
+            <br>
+            <pre>
+                <code class="language-javascript">
+                    var numbers = [1,2,3];//input data
+
+                    var sum = numbers.reduce(
+                        function (accumulator, value) {
+                            return accumulator + value;
+                        }
+                    , 0); //initial accumulator = 0
+                </code>
+            </pre>
+        </section>
+
+        <section class="step slide" data-x="0" data-y="-1500">
+            <h1 class="is-size-1 has-text-dark">Reusable Functions</h1>
+            <br>
+            <pre>
+                <code class="language-javascript">
+                    var numbers = [1,2,3];//input data
+
+                    var sum = total(numbers);
+
+                    function total(numbers) {
+                        var initialValue = 0;
+                        return numbers.reduce(add, initialValue);
+                    }
+
+                    function add(a, b) {
+                        return a + b;
+                    }
+                </code>
+            </pre>
+            <br>
+        </section>
+
+        <section class="step slide" data-x="1000" data-y="-1500" style="padding:40px;">
+            <h1 class="is-size-1 has-text-dark">API Design</h1>
+            <br>
+            <q style="margin-top: 10px; font-size:36px;">
+                Do one thing and do it well
+                <a href="https://github.com/ryanmcdermott/clean-code-javascript#functions-should-do-one-thing" target="_blank" class="hhas-text-grey-light" style="text-shadow:none;color:rgb(102, 102, 102);">
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                </a>
+            </q>
+            <q style="margin-top: 10px; font-size:36px;">
+                Function names should say what they do
+                <a href="https://github.com/ryanmcdermott/clean-code-javascript#function-names-should-say-what-they-do" target="_blank" class="hhas-text-grey-light" style="text-shadow:none;color:rgb(102, 102, 102);">
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                </a> 
+            </q>
+            <q style="margin-top: 10px; font-size:36px;">
+                Function shall have a fixed number of arguments
+                <a href="https://github.com/ryanmcdermott/clean-code-javascript#function-arguments-2-or-fewer-ideally" target="_blank" class="hhas-text-grey-light" style="text-shadow:none;color:rgb(102, 102, 102);">
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                </a> 
+            </q>
+            <q style="margin-top: 10px; font-size:36px;">
+                Function shall deal with data in an immutable way
+                <a href="https://github.com/ryanmcdermott/clean-code-javascript#avoid-side-effects-part-1" target="_blank" class="hhas-text-grey-light" style="text-shadow:none;color:rgb(102, 102, 102);">
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                </a> 
+            </q>
+            <q style="margin-top: 10px; font-size:36px;">
+                Function shall take data as the last argument 
+            </q>
+        </section>
+
+        <div id="title" class="step" data-x="0" data-y="0" data-scale="4">
+            <span class="try" style="font-size:64px">maximum code reuse, try</span>
+            <br>
+            <h1 style="font-size:180px"><strong>F</strong><span style="font-size:64px">unction</span> <strong>P</strong><span style="font-size:64px">rograming</span><sup>*</sup></h1>
+            <br>
+            <span class="footnote" style="display:flex; align-items: center;"><sup>*</sup>lead to the Fantasy Land <a style="background:transparent;" href="https://github.com/fantasyland/fantasy-land" target="_blank"><img width="100px" height="100px" src="https://github.com/fantasyland/fantasy-land/raw/master/logo.png"></a></span>
+        </div>
+
+        <div id="its" class="step" data-x="450" data-y="3000" data-rotate="90" data-scale="3">
+            <p>Pure Function <small>(aka "Stateless Function")</small></p>
+            <p>a → b</p>
+            <p>Input an a, get out a b</p>
+            <p>Any input a will map to one output b</p>
+            <pre>
+                <code class="language-javascript" style="font-size:0.5em;">
+                        var xs = [1, 2, 3, 4, 5];
+                        
+                        // pure
+                        xs.slice(0, 3); //=> [1, 2, 3]
+                        
+                        xs.slice(0, 3); //=> [1, 2, 3]
+
+                        // impure
+                        xs.splice(0, 3); //=> [1, 2, 3]
+                        
+                        xs.splice(0, 3); //=> [4, 5]
+                </code>
+            </pre>
+        </div>
+
+        <div id="big" class="step" data-x="3500" data-y="2100" data-rotate="180" data-scale="2.5" style="width:1000px;">
+            Currying
+            <q style="font-size:36px">
+                There is a way to reduce functions of more than one argument to functions of one argument, a way called currying after Haskell B. Curry.
+            </q>
+            <pre>
+                <code class="language-javascript" style="font-size:0.5em;">
+                    var curriedAdd = curry(
+                        function add(a, b, c) {
+                            return a + b + c;
+                        }
+                    );
+                    curriedAdd(1)(2)(3);//=> 6
+
+                    var add1 = curriedAdd(1);
+                    var add1And2 = add1(2);
+                    add1And2(3); //=> 6
+                </code>
+            </pre>
+        </div>
+
+        <div id="tiny" class="step" data-x="2825" data-y="2325" data-z="-3000" data-rotate="300" data-scale="1" style="width: 800px;">
+            <q>
+                Why Curry? -> function that can be <strong>partially configured</strong>, it encourages the creation of functions.
+            </q>
+            <br>
+            <br>
+            <q>
+                Put <strong>data the last argument</strong>, the arguments LESS likely to change first for code reuse. 
+                <br>
+            </q>
+            <q style="font-size: 0.5em;">
+                <a href="https://glebbahmutov.com/blog/put-callback-first-for-elegance/" target="_blank" class="hhas-text-grey-light" style="text-shadow:none;color:rgb(102, 102, 102); background: transparent;">
+                    Why curry helps
+                </a>/
+                <a href="https://glebbahmutov.com/blog/put-callback-first-for-elegance/" target="_blank" class="hhas-text-grey-light" style="text-shadow:none;color:rgb(102, 102, 102); background: transparent;">
+                    Put callback first for elegance
+                </a>
+            </q>
+        </div>
+
+        <div id="ing" class="step" data-x="3500" data-y="-1550" data-rotate="270" data-scale="5" style="width:1000px;">
+            <q>
+                Hindley-Milner Type Signatures
+            </q>
+            <pre>
+                <code class="language-javascript" style="font-size:0.5em;">
+                    // add3 :: Number -> Number -> Number
+                    var add3 = (a, b, c) => a + b + c;
+                    
+                    // addAll :: [Number] -> Number
+                    var addAll = numbers => numbers.reduce((acc, val) => acc + val, 0);
+
+                    // head :: [a] -> a
+                    var head = ary => ary[0];
+
+                    // map :: (a -> b) -> [a] -> [b]
+
+                    // filter :: (a -> Bool) -> [a] -> [a]
+
+                    // reduce :: ((a, b) → a) → a → [b] → a
+                </code>
+            </pre>
+        </div>
+    
+        <div id="imagination" class="step" data-x="7700" data-y="-1000" data-scale="6" style="width:900px;">
+            Compose Function
+            <br>
+            <q>
+                a( b (x) ) = compose(a, b)(x)
+            </q>
+            <pre>
+                <code class="language-javascript" style="font-size:0.5em;">
+                    var compose = (a, b) => (x) => a( b (x) );
+
+                    var number = compose(Math.round, parseFloat);
+                    number('72.5'); //=> 73
+
+                    var multiple = (a, b) => a * b;
+                    var double = curry(multiple)(2);
+                    var doubleNumber = compose(double, number);
+                    doubleNumber('72.5'); //=> 146
+                </code>
+            </pre>
+        </div>
+    
+        <div id="source" class="step" data-x="6300" data-y="2000" data-rotate="20" data-scale="4">
+            <q><strong>Breed</strong> your functions! May the Force be with you</q>
+        </div>
+    
+        <div id="one-more-thing" class="step" data-x="6000" data-y="4000" data-scale="2">
+            one more thing...
+        </div>
+
+        <div id="its-in-3d" class="step" data-x="6400" data-y="4600" data-z="-100" data-rotate-x="-40" data-rotate-y="10" data-scale="2">
+            You can apply the concept to UI
+            <br>
+            <br>
+
+            <q>
+               State → View
+            </q>
+            <br>
+            <q>
+                View Action → State → View
+            </q>
+        </div>
+
+        <div id="overview" class="step" data-x="3000" data-y="1500" data-scale="10">
+        </div>
+    </div>
+
+    <script type="text/javascript"  src="impress.js"></script>
+    <script>impress().init();</script>
+    <script src="prism.js"></script>
+  </body>
+</html>
